@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ioannis Zannias</title>
+<meta name="description" content="Ioannis Zannias — PhD candidate in Economics at the Athens University of Economics and Business.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#faf8f4;
+    --ink:#1c2430;
+    --ink-soft:#4a5160;
+    --rule:#d8d2c4;
+    --rust:#a23b2e;
+    --rust-dim:#c97a6c;
+    --maxw:780px;
+    --nav-h:56px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',sans-serif;
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:var(--rust);text-decoration:none;}
+  a:hover{text-decoration:underline;}
+
+  /* ── Nav ── */
+  nav{
+    position:sticky;
+    top:0;
+    z-index:100;
+    background:var(--paper);
+    border-bottom:1px solid var(--rule);
+    height:var(--nav-h);
+    display:flex;
+    align-items:center;
+  }
+  .nav-inner{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:0 28px;
+    width:100%;
+    display:flex;
+    align-items:center;
+    gap:32px;
+  }
+  .nav-name{
+    font-family:'Newsreader',serif;
+    font-weight:600;
+    font-size:1.05rem;
+    color:var(--ink);
+    white-space:nowrap;
+    margin-right:auto;
+  }
+  .nav-name a{color:inherit;}
+  .nav-links{
+    display:flex;
+    gap:24px;
+    list-style:none;
+  }
+  .nav-links a{
+    font-size:14px;
+    color:var(--ink-soft);
+    font-weight:500;
+    padding:4px 0;
+    border-bottom:2px solid transparent;
+    transition:color .15s, border-color .15s;
+  }
+  .nav-links a:hover,
+  .nav-links a.active{
+    color:var(--rust);
+    border-bottom-color:var(--rust);
+    text-decoration:none;
+  }
+
+  /* ── Pages ── */
+  .page{display:none;}
+  .page.active{display:block;}
+
+  /* ── Wrap ── */
+  .wrap{
+    max-width:var(--maxw);
+    margin:0 auto;
+    padding:64px 28px 100px;
+  }
+
+  /* ── Home ── */
+  .home-hero{padding:32px 0 48px;}
+  .home-eyebrow{
+    font-size:13px;
+    color:var(--rust);
+    font-weight:500;
+    letter-spacing:.04em;
+    margin-bottom:16px;
+  }
+  h1.home-name{
+    font-family:'Newsreader',serif;
+    font-weight:600;
+    font-size:clamp(2.6rem,6vw,3.8rem);
+    line-height:1.05;
+    letter-spacing:-.01em;
+    margin-bottom:20px;
+  }
+  .home-desc{
+    font-size:1.1rem;
+    color:var(--ink-soft);
+    max-width:54ch;
+    line-height:1.7;
+    margin-bottom:32px;
+  }
+  .home-desc strong{color:var(--ink);}
+  .home-links{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+  }
+  .btn{
+    display:inline-block;
+    font-size:14px;
+    font-weight:600;
+    padding:9px 18px;
+    border-radius:6px;
+    transition:opacity .15s;
+  }
+  .btn:hover{opacity:.85;text-decoration:none;}
+  .btn-primary{background:var(--rust);color:#fff;}
+  .btn-secondary{
+    background:transparent;
+    color:var(--ink);
+    border:1px solid var(--rule);
+  }
+
+  /* ── Section headings ── */
+  h2.section-title{
+    font-family:'Newsreader',serif;
+    font-size:1.75rem;
+    font-weight:600;
+    margin-bottom:8px;
+  }
+  .section-rule{
+    height:1px;
+    background:var(--rule);
+    margin-bottom:36px;
+  }
+
+  /* ── Research ── */
+  .paper-item{margin-bottom:32px;}
+  .paper-title{
+    font-family:'Newsreader',serif;
+    font-size:1.1rem;
+    font-weight:500;
+    color:var(--ink);
+    margin-bottom:4px;
+  }
+  .paper-meta{
+    font-size:14px;
+    color:var(--ink-soft);
+    margin-bottom:10px;
+  }
+  .tag-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px;}
+  .tag{
+    font-size:12px;
+    color:var(--ink-soft);
+    border:1px solid var(--rule);
+    padding:3px 10px;
+    border-radius:999px;
+  }
+
+  /* ── Timeline (CV) ── */
+  .cv-section{margin-bottom:44px;}
+  .cv-section-title{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--rust-dim);
+    margin-bottom:16px;
+  }
+  .t-list{list-style:none;}
+  .t-item{
+    display:grid;
+    grid-template-columns:130px 1fr;
+    gap:16px;
+    padding:14px 0;
+    border-top:1px solid var(--paper);
+  }
+  .t-item:first-child{border-top:none;padding-top:0;}
+  .t-date{
+    font-size:12.5px;
+    color:var(--ink-soft);
+    padding-top:2px;
+    line-height:1.5;
+  }
+  .t-role{font-weight:600;font-size:15px;margin-bottom:2px;}
+  .t-org{color:var(--ink-soft);font-size:14px;margin-bottom:4px;}
+  .t-detail{color:var(--ink-soft);font-size:14px;}
+  .t-detail a{color:var(--rust);}
+
+  @media(max-width:520px){
+    .t-item{grid-template-columns:1fr;gap:2px;}
+    .nav-links{gap:14px;}
+  }
+
+  /* ── Teaching ── */
+  .teach-item{
+    padding:20px 0;
+    border-bottom:1px solid var(--rule);
+  }
+  .teach-item:last-child{border-bottom:none;}
+  .teach-role{font-weight:600;font-size:15px;margin-bottom:2px;}
+  .teach-course{color:var(--ink-soft);font-size:14.5px;}
+  .teach-date{font-size:13px;color:var(--rust-dim);margin-top:4px;}
+
+  /* ── Contact ── */
+  .contact-list{list-style:none;display:grid;gap:20px;}
+  .contact-list li{display:flex;flex-direction:column;gap:3px;}
+  .contact-label{
+    font-size:11px;
+    font-weight:600;
+    letter-spacing:.1em;
+    text-transform:uppercase;
+    color:var(--rust-dim);
+  }
+  .contact-value{font-size:15px;}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-name"><a href="#" onclick="showPage('home')">Ioannis Zannias</a></div>
+    <ul class="nav-links">
+      <li><a href="#" onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+      <li><a href="#" onclick="showPage('research')" id="nav-research">Research</a></li>
+      <li><a href="#" onclick="showPage('cv')" id="nav-cv">CV</a></li>
+      <li><a href="#" onclick="showPage('teaching')" id="nav-teaching">Teaching</a></li>
+      <li><a href="#" onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ── HOME ── -->
+<div class="page active" id="page-home">
+  <div class="wrap">
+    <div class="home-hero">
+      <p class="home-eyebrow">PhD Candidate · Department of Economics · AUEB</p>
+      <h1 class="home-name">Ioannis Zannias</h1>
+      <p class="home-desc">
+        I am a PhD candidate at the <strong>Athens University of Economics and Business</strong>, working under the supervision of <strong>Vassilis Sarantides</strong>. My research focuses on the <strong>causes and consequences of populism</strong>, sitting at the intersection of political economy and applied econometrics.
+      </p>
+      <div class="home-links">
+        <a href="#" class="btn btn-primary" onclick="showPage('research')">Research</a>
+        <a href="#" class="btn btn-secondary" onclick="showPage('cv')">Curriculum Vitae</a>
+        <a href="#" class="btn btn-secondary" onclick="showPage('contact')">Contact</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── RESEARCH ── -->
+<div class="page" id="page-research">
+  <div class="wrap">
+    <h2 class="section-title">Research</h2>
+    <div class="section-rule"></div>
+
+    <div class="paper-item">
+      <p class="paper-title">Populism: Causes and Consequences</p>
+      <p class="paper-meta">PhD Dissertation · Supervisor: Vassilis Sarantides, AUEB</p>
+      <div class="tag-row">
+        <span class="tag">Political Economy</span>
+        <span class="tag">Populism</span>
+        <span class="tag">Applied Econometrics</span>
+      </div>
+    </div>
+
+    <div class="section-rule" style="margin-top:40px;margin-bottom:28px;"></div>
+    <p style="font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--rust-dim);margin-bottom:24px;">Work in Progress</p>
+
+    <div class="paper-item">
+      <p class="paper-title">The Rise of Populist Voting in Greece: Evidence from 6,125 Localities, 2012–2023</p>
+      <div class="tag-row">
+        <span class="tag">Populism</span>
+        <span class="tag">Electoral Geography</span>
+        <span class="tag">Panel Data</span>
+        <span class="tag">Greece</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ── CV ── -->
+<div class="page" id="page-cv">
+  <div class="wrap">
+    <h2 class="section-title">Curriculum Vitae</h2>
+    <div class="section-rule"></div>
+
+    <div class="cv-section">
+      <p class="cv-section-title">Education</p>
+      <ul class="t-list">
+        <li class="t-item">
+          <span class="t-date">Dec 2025 — Present</span>
+          <div>
+            <p class="t-role">PhD in Economics</p>
+            <p class="t-org">Athens University of Economics and Business</p>
+            <p class="t-detail">Populism: Causes and Consequences · Supervisor: Vassilis Sarantides</p>
+          </div>
+        </li>
+        <li class="t-item">
+          <span class="t-date">Sep 2024 — Dec 2025</span>
+          <div>
+            <p class="t-role">MSc in Economics</p>
+            <p class="t-org">Athens University of Economics and Business</p>
+            <p class="t-detail">Thesis: <a href="https://pyxida.aueb.gr/files/3083f1c1-fe2d-4749-9434-5d4b8cf26530/download/Zannias_2025.pdf" target="_blank">"Determinants of Anti-Establishment Votes in Greece"</a></p>
+          </div>
+        </li>
+        <li class="t-item">
+          <span class="t-date">Oct 2019 — Jun 2024</span>
+          <div>
+            <p class="t-role">BSc in Economics</p>
+            <p class="t-org">Athens University of Economics and Business</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="cv-section">
+      <p class="cv-section-title">Experience</p>
+      <ul class="t-list">
+        <li class="t-item">
+          <span class="t-date">Feb 2026 — Present</span>
+          <div>
+            <p class="t-role">Teaching Assistant</p>
+            <p class="t-org">Athens University of Economics and Business</p>
+            <p class="t-detail">Undergraduate course: Time Series and Forecasting</p>
+          </div>
+        </li>
+        <li class="t-item">
+          <span class="t-date">May 2025 — Present</span>
+          <div>
+            <p class="t-role">Research Assistant</p>
+            <p class="t-org">Athens University of Economics and Business</p>
+            <p class="t-detail">Project: "Armed Conflict, Political Preferences, and Reconstruction"</p>
+          </div>
+        </li>
+        <li class="t-item">
+          <span class="t-date">Apr 2024 — Jul 2024</span>
+          <div>
+            <p class="t-role">Data Analyst</p>
+            <p class="t-org">Athens University of Economics and Business</p>
+          </div>
+        </li>
+        <li class="t-item">
+          <span class="t-date">Jun 2021 — Present</span>
+          <div>
+            <p class="t-role">Computer Science Instructor</p>
+            <p class="t-org">Axia Private Tutoring School, Athens</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div class="cv-section">
+      <p class="cv-section-title">Skills</p>
+      <p style="font-size:14.5px;color:var(--ink-soft);"><strong style="color:var(--ink);">Software:</strong> Python, MATLAB, R, Stata, LaTeX</p>
+      <p style="font-size:14.5px;color:var(--ink-soft);margin-top:8px;"><strong style="color:var(--ink);">Languages:</strong> Greek (native), English (fluent)</p>
+    </div>
+
+    <a href="CV_Zannias_public.pdf" target="_blank" class="btn btn-primary" style="margin-top:8px;">Download CV (PDF)</a>
+  </div>
+</div>
+
+<!-- ── TEACHING ── -->
+<div class="page" id="page-teaching">
+  <div class="wrap">
+    <h2 class="section-title">Teaching</h2>
+    <div class="section-rule"></div>
+
+    <div class="teach-item">
+      <p class="teach-role">Teaching Assistant</p>
+      <p class="teach-course">Time Series and Forecasting — Undergraduate course, Department of Economics, AUEB</p>
+      <p class="teach-date">February 2026 – Present</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── CONTACT ── -->
+<div class="page" id="page-contact">
+  <div class="wrap">
+    <h2 class="section-title">Contact</h2>
+    <div class="section-rule"></div>
+    <ul class="contact-list">
+      <li>
+        <span class="contact-label">Email</span>
+        <span class="contact-value"><a href="mailto:gianniszecon@gmail.com">gianniszecon@gmail.com</a></span>
+      </li>
+      <li>
+        <span class="contact-label">Institution</span>
+        <span class="contact-value">Department of Economics<br>Athens University of Economics and Business</span>
+      </li>
+      <li>
+        <span class="contact-label">CV</span>
+        <span class="contact-value"><a href="CV_Zannias_public.pdf" target="_blank">Download PDF</a></span>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<script>
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  document.getElementById('nav-' + name).classList.add('active');
+  window.scrollTo(0, 0);
+  return false;
+}
+</script>
+
+</body>
+</html>
